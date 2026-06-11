@@ -55,6 +55,8 @@ const LeadsPage = () => {
               <th style={{ padding: '14px' }}>Product</th>
               <th style={{ padding: '14px' }}>Status</th>
               <th style={{ padding: '14px' }}>Action</th>
+              <th style={{ padding: '14px' }}>Gmail</th>
+              <th style={{ padding: '14px' }}>Phone</th>
             </tr>
           </thead>
           <tbody>
@@ -68,6 +70,8 @@ const LeadsPage = () => {
                     {lead.status}
                   </span>
                 </td>
+                <td style={{ padding: '14px' }}>{lead.email}</td>
+                <td style={{ padding: '14px' }}>{lead.phone}</td>
                 <td style={{ padding: '14px' }}>
                   {/* 🟢 CHANGED: Passed lead._id into the change handler update call */}
                   <select value={lead.status} onChange={(e) => updateStatus(lead._id, e.target.value)} style={{ padding: '4px', borderRadius: '4px' }}>

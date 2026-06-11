@@ -7,10 +7,10 @@ const Navbar = ({ user, onLogout }) => {
         EMPLOYEE PORTAL
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-        <span style={{ fontSize: '14px', color: '#475569', fontWeight: '500' }}>Logged in as: {user?.email}</span>
-        <button 
-          onClick={onLogout} 
-          style={{ padding: '8px 16px', background: '#f1f5f9', border: '1px solid #cbd5e1', borderRadius: '6px', cursor: 'pointer', fontSize: '14px', fontWeight: '500', transition: 'all 0.2s' }}
+        <span style={{ fontSize: '14px', color: '#475569', fontWeight: '500' }}>Logged in as: {user?.firstName} {user?.lastName}</span>
+        <button
+          onClick={onLogout}
+          style={{ padding: '8px 16px', background: '#f9f1f1ff', border: '1px solid #cbd5e1', borderRadius: '6px', cursor: 'pointer', fontSize: '14px', fontWeight: '500', transition: 'all 0.2s' }}
         >
           Logout
         </button>
