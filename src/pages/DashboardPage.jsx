@@ -47,6 +47,24 @@ const DashboardPage = () => {
           <p style={{ margin: 0, fontSize: '32px', fontWeight: 'bold', color: '#2563eb' }}>{data?.inProgress || 0}</p>
         </div>
 
+        {/* Ringing Card */}
+        <div style={{ padding: '24px', background: '#fff', border: '1px solid #e2e8f0', borderRadius: '10px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+          <h3 style={{ margin: '0 0 8px 0', color: '#b06000', fontSize: '14px', textTransform: 'uppercase', fontWeight: '600' }}>Ringing</h3>
+          <p style={{ margin: 0, fontSize: '32px', fontWeight: 'bold', color: '#b06000' }}>{data?.ringing || 0}</p>
+        </div>
+
+        {/* Call Back Card */}
+        <div style={{ padding: '24px', background: '#fff', border: '1px solid #e2e8f0', borderRadius: '10px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+          <h3 style={{ margin: '0 0 8px 0', color: '#b06000', fontSize: '14px', textTransform: 'uppercase', fontWeight: '600' }}>Call Back</h3>
+          <p style={{ margin: 0, fontSize: '32px', fontWeight: 'bold', color: '#b06000' }}>{data?.callback || 0}</p>
+        </div>
+
+        {/* Documents Verified Card */}
+        <div style={{ padding: '24px', background: '#fff', border: '1px solid #e2e8f0', borderRadius: '10px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+          <h3 style={{ margin: '0 0 8px 0', color: '#6b21a8', fontSize: '14px', textTransform: 'uppercase', fontWeight: '600' }}>Documents Verified</h3>
+          <p style={{ margin: 0, fontSize: '32px', fontWeight: 'bold', color: '#6b21a8' }}>{data?.documentsVerified || 0}</p>
+        </div>
+
         {/* Approved Closures Card */}
         <div style={{ padding: '24px', background: '#fff', border: '1px solid #e2e8f0', borderRadius: '10px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
           <h3 style={{ margin: '0 0 8px 0', color: '#16a34a', fontSize: '14px', textTransform: 'uppercase', fontWeight: '600' }}>Approved Closures</h3>
