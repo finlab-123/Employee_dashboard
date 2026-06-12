@@ -10,7 +10,7 @@ const Navbar = ({ user, onLogout }) => {
         <span style={{ fontSize: '14px', color: '#475569', fontWeight: '500' }}>Logged in as: {user?.firstName} {user?.lastName}</span>
         <button
           onClick={onLogout}
-          style={{ padding: '8px 16px', background: '#f9f1f1ff', border: '1px solid #cbd5e1', borderRadius: '6px', cursor: 'pointer', fontSize: '14px', fontWeight: '500', transition: 'all 0.2s' }}
+          style={{ padding: '8px 16px', color:'#ffffff', background: '#dc2727ff', border: '1px solid #000000ff', borderRadius: '6px', cursor: 'pointer', fontSize: '14px', fontWeight: '500', transition: 'all 0.2s' }}
         >
           Logout
         </button>

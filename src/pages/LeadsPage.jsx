@@ -38,9 +38,16 @@ const LeadsPage = () => {
 
       const response = await axiosClient.patch(`/employee/leads/${id}/status`, payload);
       if (response.data.success) {
+        // 🟢 FIXED: Server returns the updated object with the remarks array inside response.data.data
+        const updatedLeadFromServer = response.data.data;
+
         setLeads(prev => prev.map(lead => 
           lead._id === id 
-            ? { ...lead, status, remark: remarkText || lead.remark } 
+            ? { 
+                ...lead, 
+                status: updatedLeadFromServer.status, 
+                remarks: updatedLeadFromServer.remarks || lead.remarks 
+              } 
             : lead
         ));
       }
@@ -147,18 +154,26 @@ const LeadsPage = () => {
             ) : (
               leads.map(lead => {
                 const badgeStyle = getStatusStyle(lead.status);
+                
+                // 🟢 FIXED: Safely grab the text of the newest entry inside the array
+                const latestRemarkText = Array.isArray(lead.remarks) && lead.remarks.length > 0 
+                  ? lead.remarks[lead.remarks.length - 1]?.text 
+                  : null;
+
                 return (
                   <tr key={lead._id} style={{ borderBottom: '1px solid #f1f5f9', transition: 'background 0.2s' }}>
                     
-                    {/* Column 1: Profile & Remark */}
+                    {/* Column 1: Profile & Remark Array Parser */}
                     <td style={{ padding: '16px', verticalAlign: 'top' }}>
                       <div style={{ fontWeight: '600', color: '#1e293b', fontSize: '15px' }}>{lead.firstName} {lead.lastName}</div>
-                      {lead.status === 'Rejected' && lead.remark && (
+                      
+                      {/* 🟢 FIXED: Changed conditional expression to parse latestRemarkText variable */}
+                      {lead.status === 'Rejected' && latestRemarkText && (
                         <div style={{ 
                           fontSize: '12px', color: '#991b1b', background: '#fef2f2', borderLeft: '3px solid #f87171',
                           padding: '6px 10px', borderRadius: '0 4px 4px 0', marginTop: '8px', maxWidth: '280px', lineHeight: '1.4'
                         }}>
-                          <strong>Audit Log:</strong> "{lead.remark}"
+                          <strong>Audit Log:</strong> "{latestRemarkText}"
                         </div>
                       )}
                     </td>
