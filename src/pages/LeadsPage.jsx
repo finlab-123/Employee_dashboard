@@ -141,8 +141,8 @@ const LeadsPage = () => {
             <tr style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
               <th style={{ padding: '16px', color: '#475569', fontWeight: '600' }}>Applicant Profile</th>
               <th style={{ padding: '16px', color: '#475569', fontWeight: '600' }}>Product Focus</th>
-              <th style={{ padding: '16px', color: '#475569', fontWeight: '600' }}>Pipeline Status</th>
-              <th style={{ padding: '16px', color: '#475569', fontWeight: '600' }}>Workflow Routing</th>
+              <th style={{ padding: '16px', color: '#475569', fontWeight: '600' }}>Lead Status</th>
+              <th style={{ padding: '16px', color: '#475569', fontWeight: '600' }}>update lead status</th>
               <th style={{ padding: '16px', color: '#475569', fontWeight: '600' }}>Communication Details</th>
             </tr>
           </thead>
