@@ -7,7 +7,7 @@ const Navbar = ({ user, onLogout }) => {
         EMPLOYEE PORTAL
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-        <span style={{ fontSize: '14px', color: '#475569', fontWeight: '500' }}>Logged in as: {user?.firstName} {user?.lastName}</span>
+        <span style={{ fontSize: '14px', color: '#475569', fontWeight: '500' }}>Logged in as: {user?.fullname}</span>
         <button
           onClick={onLogout}
           style={{ padding: '8px 16px', color:'#ffffff', background: '#dc2727ff', border: '1px solid #000000ff', borderRadius: '6px', cursor: 'pointer', fontSize: '14px', fontWeight: '500', transition: 'all 0.2s' }}

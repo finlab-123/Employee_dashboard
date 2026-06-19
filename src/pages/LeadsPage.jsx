@@ -11,7 +11,8 @@ const LeadsPage = () => {
     isOpen: false,
     leadId: null,
     targetStatus: '',
-    remark: ''
+    remark: '',
+    previousStatus: '' // Track previous status to reset dropdown if cancelled
   });
 
   useEffect(() => {
@@ -38,7 +39,6 @@ const LeadsPage = () => {
 
       const response = await axiosClient.patch(`/employee/leads/${id}/status`, payload);
       if (response.data.success) {
-        // 🟢 FIXED: Server returns the updated object with the remarks array inside response.data.data
         const updatedLeadFromServer = response.data.data;
 
         setLeads(prev => prev.map(lead => 
@@ -57,13 +57,14 @@ const LeadsPage = () => {
   };
 
   // Intercept changes from the HTML select dropdown picker
-  const handleStatusSelectChange = (id, newStatus) => {
+  const handleStatusSelectChange = (id, currentStatus, newStatus) => {
     if (newStatus === 'Rejected') {
       setRejectionModal({
         isOpen: true,
         leadId: id,
         targetStatus: newStatus,
-        remark: ''
+        remark: '',
+        previousStatus: currentStatus // Store current status in case of cancellation
       });
     } else {
       executeStatusChange(id, newStatus, '');
@@ -81,7 +82,7 @@ const LeadsPage = () => {
     }
 
     executeStatusChange(leadId, targetStatus, remark.trim());
-    setRejectionModal({ isOpen: false, leadId: null, targetStatus: '', remark: '' });
+    setRejectionModal({ isOpen: false, leadId: null, targetStatus: '', remark: '', previousStatus: '' });
   };
 
   // Helper utility function to style badge indicators elegantly
@@ -142,7 +143,7 @@ const LeadsPage = () => {
               <th style={{ padding: '16px', color: '#475569', fontWeight: '600' }}>Applicant Profile</th>
               <th style={{ padding: '16px', color: '#475569', fontWeight: '600' }}>Product Focus</th>
               <th style={{ padding: '16px', color: '#475569', fontWeight: '600' }}>Lead Status</th>
-              <th style={{ padding: '16px', color: '#475569', fontWeight: '600' }}>update lead status</th>
+              <th style={{ padding: '16px', color: '#475569', fontWeight: '600' }}>Update Lead Status</th>
               <th style={{ padding: '16px', color: '#475569', fontWeight: '600' }}>Communication Details</th>
             </tr>
           </thead>
@@ -155,7 +156,6 @@ const LeadsPage = () => {
               leads.map(lead => {
                 const badgeStyle = getStatusStyle(lead.status);
                 
-                // 🟢 FIXED: Safely grab the text of the newest entry inside the array
                 const latestRemarkText = Array.isArray(lead.remarks) && lead.remarks.length > 0 
                   ? lead.remarks[lead.remarks.length - 1]?.text 
                   : null;
@@ -167,7 +167,6 @@ const LeadsPage = () => {
                     <td style={{ padding: '16px', verticalAlign: 'top' }}>
                       <div style={{ fontWeight: '600', color: '#1e293b', fontSize: '15px' }}>{lead.firstName} {lead.lastName}</div>
                       
-                      {/* 🟢 FIXED: Changed conditional expression to parse latestRemarkText variable */}
                       {lead.status === 'Rejected' && latestRemarkText && (
                         <div style={{ 
                           fontSize: '12px', color: '#991b1b', background: '#fef2f2', borderLeft: '3px solid #f87171',
@@ -197,7 +196,7 @@ const LeadsPage = () => {
                     <td style={{ padding: '16px', verticalAlign: 'top', paddingTop: '14px' }}>
                       <select 
                         value={lead.status} 
-                        onChange={(e) => handleStatusSelectChange(lead._id, e.target.value)} 
+                        onChange={(e) => handleStatusSelectChange(lead._id, lead.status, e.target.value)} 
                         style={{ 
                           padding: '6px 10px', borderRadius: '6px', border: '1px solid #cbd5e1', 
                           background: '#fff', color: '#334155', fontWeight: '500', cursor: 'pointer', outline: 'none'
@@ -209,6 +208,7 @@ const LeadsPage = () => {
                         <option value="call back">Call Back</option>
                         <option value="Documents Verified">Documents Verified</option>
                         <option value="Rejected">Rejected</option>
+                        <option value="Approved">Approved</option>
                       </select>
                     </td>
                     
@@ -263,7 +263,7 @@ const LeadsPage = () => {
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '20px' }}>
                 <button 
                   type="button" 
-                  onClick={() => setRejectionModal({ isOpen: false, leadId: null, targetStatus: '', remark: '' })}
+                  onClick={() => setRejectionModal({ isOpen: false, leadId: null, targetStatus: '', remark: '', previousStatus: '' })}
                   style={{ 
                     padding: '8px 16px', borderRadius: '6px', border: '1px solid #cbd5e1', 
                     background: '#fff', color: '#475569', cursor: 'pointer', fontSize: '14px', fontWeight: '500' 
