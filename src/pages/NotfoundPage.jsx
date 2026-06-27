@@ -2,7 +2,7 @@ import React from 'react';
 
 const NotFoundPage = () => {
     const handleBackToLogin = () => {
-        window.location.replace("http://localhost:5175");
+        window.location.replace("https://bynd-form.vercel.app/");
     };
 
     return (

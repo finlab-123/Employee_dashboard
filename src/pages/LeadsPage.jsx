@@ -12,7 +12,7 @@ const LeadsPage = () => {
     leadId: null,
     targetStatus: '',
     remark: '',
-    previousStatus: '' // Track previous status to reset dropdown if cancelled
+    previousStatus: '' 
   });
 
   useEffect(() => {
@@ -127,8 +127,8 @@ const LeadsPage = () => {
       {/* Header Pipeline Panel */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <div>
-          <h1 style={{ color: '#0f172a', margin: '0 0 4px 0', fontSize: '24px', fontWeight: '700', letterSpacing: '-0.02em' }}>Assigned Pipeline</h1>
-          <p style={{ margin: 0, color: '#64748b', fontSize: '14px' }}>Track, audit, and dispatch credit leads allocations securely.</p>
+          <h1 style={{ color: '#0f172a', margin: '0 0 4px 0', fontSize: '24px', fontWeight: '700', letterSpacing: '-0.02em' }}>Assigned Leads</h1>
+          <p style={{ margin: 0, color: '#64748b', fontSize: '14px' }}>Track, audit, and disburse leads securely.</p>
         </div>
         <div style={{ background: '#7ab600', color: '#fff', padding: '8px 16px', borderRadius: '6px', fontSize: '14px', fontWeight: '500' }}>
           Active Leads: {leads.length}
@@ -172,7 +172,7 @@ const LeadsPage = () => {
                           fontSize: '12px', color: '#991b1b', background: '#fef2f2', borderLeft: '3px solid #f87171',
                           padding: '6px 10px', borderRadius: '0 4px 4px 0', marginTop: '8px', maxWidth: '280px', lineHeight: '1.4'
                         }}>
-                          <strong>Audit Log:</strong> "{latestRemarkText}"
+                          <strong>Remark</strong> "{latestRemarkText}"
                         </div>
                       )}
                     </td>
